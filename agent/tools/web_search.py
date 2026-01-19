@@ -4,11 +4,12 @@ import os
 
 from dotenv import load_dotenv
 from openai import OpenAI
+from langchain_core.tools import tool
 
 load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-
+@tool
 def search_job_posting(job_url: str) -> str:
     """Fetch and summarize a job posting from a URL using GPT-4o search.
 
@@ -32,7 +33,6 @@ def search_job_posting(job_url: str) -> str:
             {
                 "role": "user",
                 "content": f"""Visit this job posting and extract details: {job_url}
-
                 Extract and summarize all key information including:
                 - Job title
                 - Company name

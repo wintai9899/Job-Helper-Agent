@@ -6,7 +6,9 @@ import subprocess
 import docx
 import pdfplumber
 
+from langchain_core.tools import tool
 
+@tool
 def extract_cv_text(file_path: str) -> str:
     """Extract text content from a CV/resume file.
 
