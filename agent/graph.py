@@ -1,5 +1,6 @@
 from langgraph.graph import START, StateGraph, MessagesState
 from langgraph.prebuilt import tools_condition, ToolNode
+from langgraph.checkpoint.memory import MemorySaver
 
 from .nodes import assistant, tools
 
@@ -13,4 +14,5 @@ builder.add_edge(START, "assistant")
 builder.add_conditional_edges("assistant", tools_condition)
 
 builder.add_edge("tools", "assistant")
-react_graph = builder.compile()
+memory = MemorySaver()
+react_graph = builder.compile(checkpointer=memory)
